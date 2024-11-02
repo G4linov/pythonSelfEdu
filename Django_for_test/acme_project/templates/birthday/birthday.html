@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+<form>
+    <table>
+        {{ form }}
+    </table>
+    <input type="submit" value="Submit">
+</form>
+
+{% with data=request.GET %}
+{% if data %}
+<h2>Привет, {{data.first_name}} {{data.last_name}}</h2>
+{%endif%}
+{% endwith %}
 
 {% endblock %}
