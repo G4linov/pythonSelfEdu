@@ -32,6 +32,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'acme_project.urls'
 
+MEDIA_ROOT = BASE_DIR / 'media'
+
 TEMPLATES_DIR = BASE_DIR / 'templates'
 
 TEMPLATES = [

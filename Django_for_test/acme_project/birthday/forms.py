@@ -1,20 +1,18 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .validators import real_age
+from .models import Birthday
 
 
 BEATLES = {'Джон Леннон', 'Пол Маккартни', 'Джордж Харрисон', 'Ринго Старр'}
 
 class BirthdayForm(forms.ModelForm):
-    first_name = forms.CharField(label='Имя', max_length=20)
-    last_name = forms.CharField(
-        label='Фамилия', required=False, help_text='Необязательное поле'
-    )
-    birthday = forms.DateField(
-        label='Дата рождения',
-        widget=forms.DateInput(attrs={'type': 'date'}),
-        validators=(real_age,),
-    )
+    class Meta:
+        model = Birthday
+        fields = '__all__'
+        widgets = {
+            'birthday': forms.DateInput(attrs={'type': 'date'})
+        }
+
     def clean_first_name(self):
         first_name = self.cleaned_data['first_name']
         return first_name.split()[0]
