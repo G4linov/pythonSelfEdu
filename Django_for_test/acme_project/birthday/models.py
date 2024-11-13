@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from .validators import real_age
 
@@ -20,3 +21,16 @@ class Birthday(models.Model):
                 name='Unique person constraints',
             ),
         )
+
+class Congratulations(models.Model):
+    text = models.TextField('Текст поздравления')
+    birthday = models.ForeignKey(
+        Birthday,
+        on_delete=models.CASCADE,
+        related_name='congratulations',
+    )
+    created_at =  models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('created_at',)
